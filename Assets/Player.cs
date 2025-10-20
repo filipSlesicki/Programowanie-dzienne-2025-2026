@@ -55,6 +55,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateIsAboveGround();
+        UpdateTimer();
+        UpdateMovement();
+    }
+
+    private void UpdateIsAboveGround()
+    {
         isAboveGround = transform.position.y >= floor.position.y;
         if (isAboveGround == false)
         {
@@ -64,6 +71,18 @@ public class Player : MonoBehaviour
             position.y = floor.position.y;
             transform.position = position;
         }
+    }
+
+    private void UpdateMovement()
+    {
+        transform.position += new Vector3(
+        horizontalInput * horizontalSpeed * Time.deltaTime,
+        0,
+        forwardSpeed * Time.deltaTime);
+    }
+
+    private void UpdateTimer()
+    {
         if (timerFinished == false)
         {
             //if (Time.time > finishTime)
@@ -78,36 +97,6 @@ public class Player : MonoBehaviour
                 print("Timer finished");
             }
         }
-
-        //bool someBool = true;
-        //someBool = speed == 5;
-        //if(speed > 5)
-        //{
-        //    print(speed);
-        //}
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            print("Space pressed");
-        }
-
-        //if (Keyboard.current.dKey.isPressed)
-        //{
-        //    // mno¿ymy przez Time.deltaTime ¿eby zamieniæ prêdkoœæ na klatkê na prêdkoœæ na sekundê
-        //    transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
-        //}
-
-        //if (Keyboard.current.aKey.isPressed)
-        //{
-        //    // mno¿ymy przez Time.deltaTime ¿eby zamieniæ prêdkoœæ na klatkê na prêdkoœæ na sekundê
-        //    transform.position = transform.position + new Vector3(-speed * Time.deltaTime, 0, 0);
-        //}
-
-        //transform.position += new Vector3(moveInput.x, 0, moveInput.y) * speed * Time.deltaTime;
-        transform.position += new Vector3(
-            horizontalInput * horizontalSpeed * Time.deltaTime,
-            0,
-            forwardSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -129,7 +118,7 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
-        Instantiate(bulletPrefab,bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
     }
 
     private void OnMove(InputValue value)
