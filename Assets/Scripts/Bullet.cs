@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         // jak na trafionym obiekcie nie ma komponentu Obstacle, to obstacle jest nullem (nie istnieje)
         if(obstacle != null)
         {
-            obstacle.TakeDamage();
+            obstacle.TakeDamage(2);
         }
     }
 }

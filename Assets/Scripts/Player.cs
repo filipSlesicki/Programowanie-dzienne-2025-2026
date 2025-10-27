@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -25,6 +27,9 @@ public class Player : MonoBehaviour
     private Transform floor;
     [SerializeField]
     private Transform wall;
+    [SerializeField]
+    private TMP_Text timerText;
+    private Health health;
     private Vector2 moveInput;
     private float horizontalInput;
     private Vector3 startPosition;
@@ -32,6 +37,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        health = GetComponent<Health>();
         startPosition = transform.position;
         finishTime = Time.time + timer;
         float someValue = 5.0f;
@@ -85,14 +91,11 @@ public class Player : MonoBehaviour
     {
         if (timerFinished == false)
         {
-            //if (Time.time > finishTime)
-            //{
-            //    timerFinished = true;
-            //    print("Timer finished");
-            //}
             timer -= Time.deltaTime;
+            timerText.text = timer.ToString("F1");
             if (timer <= 0)
             {
+                timerText.text = "Timer finished";
                 timerFinished = true;
                 print("Timer finished");
             }
@@ -104,6 +107,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             transform.position = startPosition;
+            health.TakeDamage(1);
         }
 
     }
@@ -118,7 +122,11 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
-        Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        if(!EventSystem.current.IsPointerOverGameObject()) // Kursor jest nad elementem UI
+        {
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            // bullet to w³aœnie stworzony bullet. Teraz mo¿emy coœ z nim zrobiæ
+        }
     }
 
     private void OnMove(InputValue value)
