@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3162703229773152025}
   - component: {fileID: 6359700305654848481}
   - component: {fileID: 1585283737150572998}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2968728177883306258}
   - component: {fileID: 5141300600484440217}
   - component: {fileID: 3942520577289674654}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6820330169927065963}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 4374649790561058900}
   - component: {fileID: 2626737317554544186}
   - component: {fileID: 8407057484436954005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Wall
   m_Icon: {fileID: 0}

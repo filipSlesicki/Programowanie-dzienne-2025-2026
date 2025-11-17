@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 10
+  ignoreTag: 
 --- !u!54 &642830634941185829
 Rigidbody:
   m_ObjectHideFlags: 0

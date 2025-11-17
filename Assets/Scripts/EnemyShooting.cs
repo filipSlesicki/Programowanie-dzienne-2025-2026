@@ -11,6 +11,7 @@ public class EnemyShooting : MonoBehaviour
     }
     private void Shoot()
     {
-        Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        GameObject shotBullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        shotBullet.GetComponent<Bullet>().ignoreTag = "Wall";
     }
 }

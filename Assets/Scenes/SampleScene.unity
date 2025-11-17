@@ -205,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 242989391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.35, y: 5.09, z: 49.14}
+  m_LocalPosition: {x: -3.35, y: 3, z: 49.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -606,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 368621297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65, y: 5.09, z: 49.14}
+  m_LocalPosition: {x: 4.65, y: 3, z: 49.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1131,7 +1131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 510254368}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -1614,7 +1614,7 @@ Transform:
   m_GameObject: {fileID: 1006116311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.42, y: 5.09, z: 49.14}
+  m_LocalPosition: {x: 1.42, y: 3, z: 49.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2097,7 +2097,7 @@ GameObject:
   - component: {fileID: 1791540156}
   - component: {fileID: 1791540154}
   - component: {fileID: 1791540155}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2319,7 +2319,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   spawnInterwal: 1
-  spawnPoint: {fileID: 368621298}
+  spawnPoints:
+  - {fileID: 368621298}
+  - {fileID: 1006116312}
+  - {fileID: 242989392}
   spawnPosition: {x: 0, y: 4, z: 20}
   minXPosition: -6
   maxXPosition: 6
