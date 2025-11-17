@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position += speed * Time.deltaTime * Vector3.forward;
+        transform.position += speed * Time.deltaTime * transform.forward;
     }
 
     private void OnTriggerEnter(Collider other)

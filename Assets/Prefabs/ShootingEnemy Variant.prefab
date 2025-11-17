@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6094310400302506136
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 745973107420302155, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 857ed40e152b7b34290c091079a7a6ff, type: 2}
+    - target: {fileID: 2626737317554544186, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: health
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3013668
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.420001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.222095
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435717888657006465, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244665621976747346, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      propertyPath: m_Name
+      value: ShootingEnemy Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8244665621976747346, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8302928729558295286}
+  m_SourcePrefab: {fileID: 100100000, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+--- !u!4 &735768039737131507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6820330169927065963, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+  m_PrefabInstance: {fileID: 6094310400302506136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2808478935962316234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8244665621976747346, guid: efa6719cbd731cf45b7d7acf2034489f, type: 3}
+  m_PrefabInstance: {fileID: 6094310400302506136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8302928729558295286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808478935962316234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5c54159bd134c41a67f656e7c6a334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooting
+  bulletPrefab: {fileID: 2359040637921023603, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
+  bulletSpawnPoint: {fileID: 735768039737131507}
+  shootInterval: 1

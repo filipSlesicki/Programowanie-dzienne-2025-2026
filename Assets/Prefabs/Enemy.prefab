@@ -238,6 +238,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &6165191529899448338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6820330169927065963}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6820330169927065963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165191529899448338}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.18, y: 0.388, z: -0.884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3435717888657006465}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8244665621976747346
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,9 +282,9 @@ GameObject:
   - component: {fileID: 745973107420302155}
   - component: {fileID: 4374649790561058900}
   - component: {fileID: 2626737317554544186}
-  - component: {fileID: 4751320326652411700}
+  - component: {fileID: 8407057484436954005}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Enemy
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,6 +304,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4305504872343394450}
+  - {fileID: 6820330169927065963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5253856876983140524
@@ -366,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   health: 3
   healthText: {fileID: 1585283737150572998}
---- !u!114 &4751320326652411700
+--- !u!114 &8407057484436954005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -375,7 +407,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8244665621976747346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a58cf1809789c9e43b958a22c36684ef, type: 3}
+  m_Script: {fileID: 11500000, guid: d0bac72ce34b9e44ba998e3750cbc6bb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 3
