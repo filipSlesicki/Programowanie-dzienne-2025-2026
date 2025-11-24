@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 745973107420302155}
   - component: {fileID: 4374649790561058900}
   - component: {fileID: 2626737317554544186}
+  - component: {fileID: 4389014407900657770}
   - component: {fileID: 8407057484436954005}
   m_Layer: 8
   m_Name: Enemy
@@ -398,6 +399,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   health: 3
   healthText: {fileID: 1585283737150572998}
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4389014407900657770}
+        m_TargetAssemblyTypeName: DropSpawner, Assembly-CSharp
+        m_MethodName: SpawnDropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8244665621976747346}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4389014407900657770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244665621976747346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cfd11926d5df954c908a78718021f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropSpawner
+  objectsToSpawn:
+  - {fileID: 7333383750743360948, guid: 74882d5b2d5cab0468fc5cdbb64665e7, type: 3}
+  dropChance: 100
 --- !u!114 &8407057484436954005
 MonoBehaviour:
   m_ObjectHideFlags: 0

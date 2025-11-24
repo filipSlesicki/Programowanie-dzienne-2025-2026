@@ -92,4 +92,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooting
   bulletPrefab: {fileID: 2359040637921023603, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
   bulletSpawnPoint: {fileID: 735768039737131507}
-  shootInterval: 1
+  shootInterval: 9.46

@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(ignoreTag))
+        if(!string.IsNullOrEmpty(ignoreTag) && other.CompareTag(ignoreTag))
         {
             return;
         }
@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         // jak na trafionym obiekcie nie ma komponentu Obstacle, to obstacle jest nullem (nie istnieje)
         if(obstacle != null)
         {
-            obstacle.TakeDamage(2);
+            obstacle.TakeDamage(1);
         }
     }
 }
