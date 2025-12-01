@@ -11,10 +11,8 @@ public class Player : MonoBehaviour
     // bool - true/false
     float timer = 3;
     float finishTime;
-
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform bulletSpawnPoint;
-
+    [SerializeField]
+    private Gun gun;
     [SerializeField]
     private float speed = 4;
     [SerializeField]
@@ -33,6 +31,7 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     private float horizontalInput;
     private Vector3 startPosition;
+    private bool isShootPressed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,8 +61,17 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateIsAboveGround();
-        UpdateTimer();
         UpdateMovement();
+        if (isShootPressed)
+        {
+            gun.Shoot();
+        }
+    }
+
+    public void SwitchWeapon(Gun newGun)
+    {
+        Destroy(gun.gameObject);
+        gun = Instantiate(newGun, transform.position + newGun.playerOffset, Quaternion.identity, transform);
     }
 
     private void UpdateIsAboveGround()
@@ -87,21 +95,6 @@ public class Player : MonoBehaviour
         forwardSpeed * Time.deltaTime);
     }
 
-    private void UpdateTimer()
-    {
-        if (timerFinished == false)
-        {
-            timer -= Time.deltaTime;
-            timerText.text = timer.ToString("F1");
-            if (timer <= 0)
-            {
-                timerText.text = "Timer finished";
-                timerFinished = true;
-                print("Timer finished");
-            }
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Wall")
@@ -109,7 +102,6 @@ public class Player : MonoBehaviour
             transform.position = startPosition;
             health.TakeDamage(1);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -120,12 +112,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnAttack()
+    private void OnAttack(InputValue value)
     {
-        if(!EventSystem.current.IsPointerOverGameObject()) // Kursor jest nad elementem UI
+        if (value.isPressed)
         {
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            // bullet to w³aœnie stworzony bullet. Teraz mo¿emy coœ z nim zrobiæ
+            // Kursor jest nad elementem UI
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                isShootPressed = true;
+            }
+        }
+        else
+        {
+            isShootPressed = false;
         }
     }
 

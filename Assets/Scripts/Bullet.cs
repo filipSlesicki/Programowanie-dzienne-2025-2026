@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10;
     public string ignoreTag;
+    [HideInInspector]
+    public int damage = 1;
 
     void Update()
     {

@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropSpawner
   objectsToSpawn:
-  - {fileID: 7333383750743360948, guid: 74882d5b2d5cab0468fc5cdbb64665e7, type: 3}
+  - {fileID: 3676095977836414954, guid: 13646f641ed96dd4183e2b8d65e93067, type: 3}
   dropChance: 100
 --- !u!114 &8407057484436954005
 MonoBehaviour:
