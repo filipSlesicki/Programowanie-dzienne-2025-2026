@@ -107,7 +107,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2359040637921023603, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
   bulletSpawnPoint: {fileID: 4878451870851122906}
   damage: 1
-  timeBetweenShots: 0.2
+  timeBetweenShots: 0.1
+  spread: 45
 --- !u!1 &7039767421981811549
 GameObject:
   m_ObjectHideFlags: 0

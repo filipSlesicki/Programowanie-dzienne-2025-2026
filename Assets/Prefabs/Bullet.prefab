@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8552400437518288946}
   - component: {fileID: -7073181287450447724}
   - component: {fileID: 642830634941185829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 10
   ignoreTag: 
+  damage: 1
+  explosion: {fileID: 1115500965594590145, guid: 3d57ae16cf520d64a870019de35324aa, type: 3}
+  explosionRadius: 5
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 768
+  explosionDamage: 4
 --- !u!54 &642830634941185829
 Rigidbody:
   m_ObjectHideFlags: 0

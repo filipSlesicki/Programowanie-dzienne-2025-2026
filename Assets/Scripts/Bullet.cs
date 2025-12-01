@@ -6,6 +6,11 @@ public class Bullet : MonoBehaviour
     public string ignoreTag;
     [HideInInspector]
     public int damage = 1;
+    [Header("Explosion")]
+    [SerializeField] GameObject explosion;
+    [SerializeField] float explosionRadius;
+    [SerializeField] LayerMask targetLayers;
+    [SerializeField] int explosionDamage;
 
     void Update()
     {
@@ -25,5 +30,20 @@ public class Bullet : MonoBehaviour
         {
             obstacle.TakeDamage(1);
         }
+        if (explosion)
+        {
+            GameObject spawnedExplosion = Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(spawnedExplosion,1);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, explosionRadius, targetLayers);
+            for(int i = 0; i < collidersInRange.Length; i++)
+            {
+                Health health = collidersInRange[i].GetComponent<Health>();
+                if(health)
+                {
+                    health.TakeDamage(explosionDamage);
+                }
+            }
+        }
+
     }
 }

@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private int damage = 1;
     [SerializeField] private float timeBetweenShots = 1;
+    [SerializeField] private float spread = 0;
+    [SerializeField] private int bulletCount = 1;
     private float timer;
     private float nextShootTime;
 
@@ -20,9 +22,16 @@ public class Gun : MonoBehaviour
     {
         if(Time.time >= nextShootTime)
         {
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<Bullet>().damage = damage;
-            nextShootTime = Time.time + timeBetweenShots;
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float spreadAngle = Random.Range(-spread, spread);
+                GameObject bullet = Instantiate(bulletPrefab,
+                    bulletSpawnPoint.position,
+                    bulletSpawnPoint.rotation * Quaternion.Euler(0, spreadAngle, 0));
+                bullet.GetComponent<Bullet>().damage = damage;
+                nextShootTime = Time.time + timeBetweenShots;
+            }
+
         }
     }
         
