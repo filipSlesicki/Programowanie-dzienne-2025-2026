@@ -1958,6 +1958,8 @@ MonoBehaviour:
   timeBetweenShots: 0.5
   spread: 0
   bulletCount: 1
+  shootType: 0
+  range: 26
 --- !u!1001 &1745564961
 PrefabInstance:
   m_ObjectHideFlags: 0

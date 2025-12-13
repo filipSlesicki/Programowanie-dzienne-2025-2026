@@ -128,7 +128,7 @@ MonoBehaviour:
   speed: 10
   ignoreTag: 
   damage: 1
-  explosion: {fileID: 1115500965594590145, guid: 3d57ae16cf520d64a870019de35324aa, type: 3}
+  explosion: {fileID: 0}
   explosionRadius: 5
   targetLayers:
     serializedVersion: 2
