@@ -13,8 +13,8 @@ public class ClickToMove : MonoBehaviour
     private float speed = 5;
     private bool clicked;
     private bool moving;
-    private Interaction clickedInteraction;
-    private Interaction mouseOverInteraction;
+    private IInteractable clickedInteraction;
+    private IInteractable mouseOverInteraction;
     private NavMeshAgent agent;
     private RaycastHit mouseHitInfo; // Nad czym jest myszka
 
@@ -31,9 +31,10 @@ public class ClickToMove : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, clickedInteraction.InteractionSpot.position) < interactionDistance)
             {
-                print("Use " + clickedInteraction.gameObject.name);
+                clickedInteraction.Interact();
                 agent.isStopped = true;
                 clickedInteraction = null;
+
             }
         }
     }
@@ -42,7 +43,7 @@ public class ClickToMove : MonoBehaviour
     {
         agent.isStopped = false;
         clickedInteraction = mouseOverInteraction;
-        if(clickedInteraction != null)
+        if (clickedInteraction != null)
         {
             agent.SetDestination(clickedInteraction.InteractionSpot.position);
         }
@@ -63,7 +64,7 @@ public class ClickToMove : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(inputValue.Get<Vector2>());
         if (Physics.Raycast(ray, out mouseHitInfo, 100, layer))
         {
-            if (mouseHitInfo.collider.TryGetComponent(out Interaction interaction))
+            if (mouseHitInfo.collider.TryGetComponent(out IInteractable interaction))
             {
                 mouseOverInteraction = interaction;
                 interaction.SetHighlighted(true);
@@ -71,15 +72,24 @@ public class ClickToMove : MonoBehaviour
         }
     }
 
-    private void OnMouseClick()
+    private void OnMouseClick(InputValue inputValue)
     {
-        agent.speed = walkSpeed;
-        OnClick();
+        print(inputValue.isPressed);
+        if (inputValue.isPressed)
+        {
+            agent.speed = walkSpeed;
+            OnClick();
+        }
+
 
     }
-    private void OnDoubleClick()
+    private void OnDoubleClick(InputValue inputValue)
     {
-        agent.speed = runSpeed;
-        OnClick();
+        print(inputValue.isPressed);
+        if (inputValue.isPressed)
+        {
+            agent.speed = runSpeed;
+            OnClick();
+        }
     }
 }

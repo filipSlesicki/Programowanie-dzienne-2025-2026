@@ -98,21 +98,21 @@
                 },
                 {
                     "name": "MousePosition",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "4879048d-56ea-4a98-9ec3-7f9e3a335050",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
                     "name": "MouseClick",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2479a729-63ee-41e7-8e1a-6a36185fbaab",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "DoubleClick",
@@ -121,7 +121,7 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
