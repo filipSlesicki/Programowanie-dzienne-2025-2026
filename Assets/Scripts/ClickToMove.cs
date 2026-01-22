@@ -74,7 +74,7 @@ public class ClickToMove : MonoBehaviour
 
     private void OnMouseClick(InputValue inputValue)
     {
-        print(inputValue.isPressed);
+
         if (inputValue.isPressed)
         {
             agent.speed = walkSpeed;
@@ -85,7 +85,6 @@ public class ClickToMove : MonoBehaviour
     }
     private void OnDoubleClick(InputValue inputValue)
     {
-        print(inputValue.isPressed);
         if (inputValue.isPressed)
         {
             agent.speed = runSpeed;

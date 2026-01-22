@@ -98,7 +98,7 @@
                 },
                 {
                     "name": "MousePosition",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4879048d-56ea-4a98-9ec3-7f9e3a335050",
                     "expectedControlType": "",
                     "processors": "",

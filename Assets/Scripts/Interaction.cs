@@ -12,6 +12,11 @@ public class Interaction : MonoBehaviour, IInteractable
     public void Interact()
     {
         print("Interact");
+        Quaternion tenY = Quaternion.Euler(0, 10, 0);
+        Quaternion rotation = transform.rotation;
+        Quaternion sum = Quaternion.Inverse(tenY) * rotation; // kolejnoœæ ma znaczenie
+        transform.rotation = sum;
+        Vector3 rot = rotation * Vector3.forward;
     }
 
     public void SetHighlighted(bool isHighlighted)
