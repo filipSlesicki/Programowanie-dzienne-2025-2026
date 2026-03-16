@@ -29,6 +29,7 @@ public class ClickToMove : MonoBehaviour
     {
         if (clickedInteraction != null)
         {
+
             if (Vector3.Distance(transform.position, clickedInteraction.InteractionSpot.position) < interactionDistance)
             {
                 clickedInteraction.Interact();

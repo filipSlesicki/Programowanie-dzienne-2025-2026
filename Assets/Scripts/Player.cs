@@ -33,9 +33,17 @@ public class Player : MonoBehaviour
     private Vector3 startPosition;
     private bool isShootPressed;
 
+    public static Player Instance;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         health = GetComponent<Health>();
         startPosition = transform.position;
         finishTime = Time.time + timer;

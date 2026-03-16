@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        Vector3 playerPosition = Player.Instance.transform.position;
+        Vector3 toPlayer = playerPosition - transform.position;
+
         transform.Translate(0, 0, -speed * Time.deltaTime);
     }
 

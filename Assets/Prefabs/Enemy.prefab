@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 2626737317554544186}
   - component: {fileID: 4389014407900657770}
   - component: {fileID: 8407057484436954005}
+  - component: {fileID: 7876529761264849016}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Wall
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   health: 3
-  healthText: {fileID: 1585283737150572998}
+  maxHealth: 1
   onDestroy:
     m_PersistentCalls:
       m_Calls:
@@ -454,3 +455,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 3
+--- !u!114 &7876529761264849016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244665621976747346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d51961b0f56ba14a84682d73d04b771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthText
+  healthText: {fileID: 1585283737150572998}
+  health: {fileID: 2626737317554544186}
