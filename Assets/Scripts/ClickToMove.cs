@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class ClickToMove : MonoBehaviour
+public class ClickToMove : MonoBehaviour 
 {
     [SerializeField] private LayerMask layer;
     [SerializeField] private float walkSpeed = 5;

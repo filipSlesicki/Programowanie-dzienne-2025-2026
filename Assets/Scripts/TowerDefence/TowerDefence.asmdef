@@ -1,0 +1,16 @@
+{
+    "name": "TowerDefence",
+    "rootNamespace": "TowerDefence",
+    "references": [
+        "GUID:679c9e9b887bbd74386676a27cfcaa49"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
