@@ -1,25 +1,49 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TowerDefence
 {
     public class EnemyDetection : MonoBehaviour
     {
-        public Transform target;
+        public Enemy target;
+        private List<Enemy> enemiesInRange = new();
+
+        private void Update()
+        {
+            if(target != null && !target.isActiveAndEnabled)
+            {
+                enemiesInRange.Remove(target);
+                target = null;
+                SelectClosestEnemy();
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Enemy"))
+            if(other.TryGetComponent(out Enemy enemy))
             {
-                print("in range");
-                target = other.transform;
+                enemiesInRange.Add(enemy);
+                SelectClosestEnemy();
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.TryGetComponent(out Enemy enemy))
             {
-                target = null;
+                enemiesInRange.Remove(enemy);
+                if(enemy == target)
+                {
+                    SelectClosestEnemy();
+                }
             }
+        }
+
+        private void SelectClosestEnemy()
+        {
+            target = enemiesInRange.OrderByDescending(enemy => enemy.GetNormalizedDistanceAlongPath()).FirstOrDefault();
+
         }
     }
 }

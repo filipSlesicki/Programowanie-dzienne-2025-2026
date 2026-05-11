@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 {
     public event Action<int, int> HealthChanged;
     [SerializeField] private int maxHealth = 1;
-    [SerializeField] UnityEvent onDestroy;
+    public UnityEvent onDestroy;
     private int health = 1;
 
     private void Start()

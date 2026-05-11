@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6882097519128338641}
   - component: {fileID: 7705475202625247803}
   - component: {fileID: 6465942036359867528}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0c58dd4c75d2a4682311861046ce39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: TowerDefence::TowerDefence.PlayerBase
+  Health: {fileID: 0}
 --- !u!114 &6465942036359867528
 MonoBehaviour:
   m_ObjectHideFlags: 0
