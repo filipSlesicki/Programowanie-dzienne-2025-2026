@@ -313,7 +313,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: TowerDefence::TowerDefence.EnemySpawner
   spawnPosition: {fileID: 935797660}
   enemyPrefab: {fileID: 6859500343342987373, guid: ef6e11aabd57f8b4f99e417a053b30cf, type: 3}
-  spawnInterval: 2
+  spawnInterval: 1
+  waves:
+  - {fileID: 11400000, guid: e78618e4cb9f9ba469a7bbeaca17d963, type: 2}
+  - {fileID: 11400000, guid: 470e604748ef7ab419da7a4b6023a3d5, type: 2}
+  waveInterval: 5
 --- !u!4 &185701210
 Transform:
   m_ObjectHideFlags: 0

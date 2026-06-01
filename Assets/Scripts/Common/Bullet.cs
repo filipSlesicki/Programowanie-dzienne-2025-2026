@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TowerDefence;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,10 +13,29 @@ public class Bullet : MonoBehaviour
     [SerializeField] float explosionRadius;
     [SerializeField] LayerMask targetLayers;
     [SerializeField] int explosionDamage;
+    private ObjectPool pool;
+    public static List<Bullet> bullets = new();
 
-    void Update()
+    public void SetPool(ObjectPool objectPool)
     {
-        transform.position += speed * Time.deltaTime * transform.forward;
+        pool = objectPool;
+    }
+
+    private void OnEnable()
+    {
+        Invoke("Release", 3);
+        bullets.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        bullets.Remove(this);
+    }
+
+    void Release()
+    {
+        pool.Release(gameObject);
+        //Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
