@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 8552400437518288946}
   - component: {fileID: -7073181287450447724}
   - component: {fileID: 642830634941185829}
+  - component: {fileID: 621618211201616066}
+  - component: {fileID: -9152212812760508883}
+  - component: {fileID: -8458372746561513384}
   m_Layer: 7
   m_Name: Bullet
   m_TagString: Bullet
@@ -128,12 +131,7 @@ MonoBehaviour:
   speed: 20
   ignoreTag: 
   damage: 1
-  explosion: {fileID: 0}
-  explosionRadius: 5
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 768
-  explosionDamage: 4
+  collisionsToDestroy: 1
 --- !u!54 &642830634941185829
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,3 +159,46 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &621618211201616066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359040637921023603}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437d9501d2226374db0c8b45ae7c428b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Common::BulletCollisionDamage
+  damage: 1
+--- !u!114 &-9152212812760508883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359040637921023603}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0716a20704a8e16499173222de6c4b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Common::BulletCollisionJumpToNext
+  jumpRange: 5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &-8458372746561513384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359040637921023603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fe0d97a6b9ce743a13e5372f0869d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: TowerDefence::BulletCollsionSlow
+  speedMultiplier: 0.5
+  slowDuration: 2

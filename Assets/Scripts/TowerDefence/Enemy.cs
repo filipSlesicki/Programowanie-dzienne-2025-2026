@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefence
@@ -6,9 +7,23 @@ namespace TowerDefence
     {
         Transform[] pathPoints;
         public float moveSpeed = 2;
+        private float currentSpeed;
         int nextPointIndex = 0;
         Health health;
         public int Reward = 1;
+        private List<EnemySpeedModifier> speedModifiers = new();
+
+        public void AddSpeedModifier(EnemySpeedModifier speedModifier)
+        {
+            speedModifiers.Add(speedModifier);
+            currentSpeed *= speedModifier.modifier;
+        }
+
+        public void RemoveSpeedModifier(EnemySpeedModifier speedModifier)
+        {
+            currentSpeed /= speedModifier.modifier;
+            speedModifiers.Remove(speedModifier);
+        }
 
         public Vector3 GetMoveDirection()
         {
@@ -27,9 +42,9 @@ namespace TowerDefence
             return nextPointIndex + 1 - distanceToNextPoint / distanceBetweenPreviousAndNextPoint;
         }
 
-
         void Start()
         {
+            currentSpeed = moveSpeed;
             pathPoints = Path.Instance.points;
             health = GetComponent<Health>();
             health.onDestroy.AddListener(() => MoneyManager.Instance.AddMoney(Reward));
@@ -37,7 +52,8 @@ namespace TowerDefence
 
         void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, pathPoints[nextPointIndex].position, moveSpeed * Time.deltaTime);
+            TickModifiers();
+            transform.position = Vector3.MoveTowards(transform.position, pathPoints[nextPointIndex].position, currentSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, pathPoints[nextPointIndex].position) == 0)
             {
                 if (nextPointIndex == pathPoints.Length - 1)
@@ -49,6 +65,20 @@ namespace TowerDefence
                 }
 
                 nextPointIndex++;
+            }
+        }
+
+        private void TickModifiers()
+        {
+            float deltaTime = Time.deltaTime;
+      
+            foreach (var modifier in speedModifiers.ToArray())
+            {
+                modifier.Tick(deltaTime);
+                if (modifier.expired)
+                {
+                    RemoveSpeedModifier(modifier);
+                }
             }
         }
     }

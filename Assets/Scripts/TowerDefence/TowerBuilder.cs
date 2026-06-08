@@ -61,11 +61,12 @@ namespace TowerDefence
         }
 
 
-        public void StartBuildingTower(TowerData tower)
+        public void StartBuildingTower(TowerData towerData)
         {
-            if(MoneyManager.Instance.TrySpendMoney(tower.Price))
+            if(MoneyManager.Instance.TrySpendMoney(towerData.Price))
             {
-                buildingTower = Instantiate(tower.Prefab);
+                buildingTower = Instantiate(towerData.Prefab);
+                buildingTower.Setup(towerData);
                 buildingTower.transform.position = mouseWorldPosition;
             }
         }

@@ -6,15 +6,27 @@ namespace TowerDefence
     {
         public EnemyDetection enemyDetection;
         public float attackSpeed = 1;
+        public IAttackModule attackModule;
         public int damage;
         private float cooldown;
         public Bullet bulletPrefab;
         public Transform shootPosition;
         private bool placed;
 
+        private void Awake()
+        {
+            attackModule = GetComponent<IAttackModule>();
+            Debug.Log("awake");
+        }
+
         public void Place()
         {
             placed = true;
+        }
+
+        public void Setup(TowerData towerData)
+        {
+            Debug.Log("Setup");
         }
 
         void Update()
@@ -37,7 +49,8 @@ namespace TowerDefence
                     Vector3 enemyPositionAfterTime = enemyPosition + enemyMoveDirection * enemy.moveSpeed * bulletTravelTime;
                     enemyPositionAfterTime.y = transform.position.y;
                     transform.LookAt(enemyPositionAfterTime);
-                    Instantiate(bulletPrefab, shootPosition.position, transform.rotation);
+                    attackModule.Attack();
+                    
                     cooldown = attackSpeed;
                 }
             }

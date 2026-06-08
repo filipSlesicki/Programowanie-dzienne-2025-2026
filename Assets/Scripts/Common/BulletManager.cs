@@ -19,7 +19,7 @@ public class BulletManager : MonoBehaviour
 
     private void Update()
     {
-        MoveBullets();
+        //MoveBullets();
     }
 
     void MoveBullets()

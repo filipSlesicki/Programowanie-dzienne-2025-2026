@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace TowerDefence
 {
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool
     {
         public static ObjectPool Instance;
-        [SerializeField] private GameObject prefab;
-        [SerializeField] private int initialPoolSize = 10;
+        private GameObject prefab;
         private Stack<GameObject> freeObjectPool = new Stack<GameObject>();
 
-
-        private void Start()
+        public ObjectPool(GameObject prefab, int initialPoolSize = 10)
         {
+            this.prefab = prefab;
             for (int i = 0; i < initialPoolSize; i++)
             {
-                GameObject pooledObject = Instantiate(prefab);
+                GameObject pooledObject = GameObject.Instantiate(prefab);
                 pooledObject.SetActive(false);
+                pooledObject.GetComponent<IPoolable>().SetPool(this);
                 freeObjectPool.Push(pooledObject);
             }
         }
@@ -25,10 +25,11 @@ namespace TowerDefence
         {
             if (freeObjectPool.Count == 0)
             {
-                GameObject pooledObject = Instantiate(prefab, position, rotation);
+                GameObject pooledObject = GameObject.Instantiate(prefab, position, rotation);
                 return pooledObject;
             }
             GameObject obj = freeObjectPool.Pop();
+            obj.GetComponent<IPoolable>().SetPool(this);
             obj.transform.SetPositionAndRotation(position, rotation);
             obj.SetActive(true);
             return obj;
