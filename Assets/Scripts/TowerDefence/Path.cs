@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace TowerDefence
@@ -5,6 +6,7 @@ namespace TowerDefence
     public class Path : MonoBehaviour
     {
         public Transform[] points;
+        public LineRenderer lineRenderer;
         public static Path Instance;
 
         void Awake()
@@ -15,6 +17,8 @@ namespace TowerDefence
                 return;
             }
             Instance = this;
+            lineRenderer.positionCount = points.Length;
+            lineRenderer.SetPositions(points.Select(p => p.position).ToArray());
         }
 
         private void OnDrawGizmos()
