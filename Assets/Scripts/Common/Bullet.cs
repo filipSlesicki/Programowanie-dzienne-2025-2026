@@ -1,29 +1,33 @@
-using System;
 using System.Collections.Generic;
 using TowerDefence;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour, IPoolable
 {
-    public event Action<Health> OnCollideWithEnemy;
-    public float speed = 10;
+    public float speed = 10f;
     public string ignoreTag;
+
     [HideInInspector]
-    public int damage = 1;
-    [SerializeField] int collisionsToDestroy = 1;
-    [Header("Explosion")]
+    public int hitsRemaining;
 
     private ObjectPool pool;
+    private HitEffectData[] hitEffects;
+    private BulletModifierData modifier;
+
     public static List<Bullet> bullets = new();
 
-    public void SetPool(ObjectPool objectPool)
+    public void SetPool(ObjectPool objectPool) => pool = objectPool;
+
+    public void Configure(HitEffectData[] effects, BulletModifierData bulletModifier)
     {
-        pool = objectPool;
+        hitEffects = effects;
+        modifier = bulletModifier;
+        hitsRemaining = bulletModifier is PierceBulletModifier pierce ? pierce.PierceCount : 0;
     }
 
     private void OnEnable()
     {
-        Invoke("Release", 3);
+        Invoke(nameof(Release), 3f);
         bullets.Add(this);
     }
 
@@ -31,53 +35,33 @@ public class Bullet : MonoBehaviour, IPoolable
     {
         bullets.Remove(this);
         CancelInvoke();
+        hitEffects = null;
+        modifier = null;
+        hitsRemaining = 0;
     }
 
-    void Release()
-    {
-        pool.Release(gameObject);
-        //Destroy(gameObject);
-    }
+    private void Release() => pool.Release(gameObject);
 
-    private void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+    private void Update() => transform.position += transform.forward * speed * Time.deltaTime;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!string.IsNullOrEmpty(ignoreTag) && other.CompareTag(ignoreTag))
-        {
+        if (!string.IsNullOrEmpty(ignoreTag) && other.CompareTag(ignoreTag))
             return;
-        }
 
-        Health obstacle = other.GetComponent<Health>(); 
-        OnCollideWithEnemy?.Invoke(obstacle);
-        collisionsToDestroy--;
-        if(collisionsToDestroy <= 0)
+        Health health = other.GetComponent<Health>();
+        if (health == null)
+            return;
+
+        if (hitEffects != null)
         {
-            Destroy(gameObject);
+            Vector3 hitPos = transform.position;
+            foreach (HitEffectData effect in hitEffects)
+                effect.ApplyTo(health, hitPos);
         }
 
-        // jak na trafionym obiekcie nie ma komponentu Obstacle, to obstacle jest nullem (nie istnieje)
-        //if (obstacle != null)
-        //{
-        //    obstacle.TakeDamage(1);
-        //}
-        //if (explosion)
-        //{
-        //    GameObject spawnedExplosion = Instantiate(explosion, transform.position, transform.rotation);
-        //    Destroy(spawnedExplosion,1);
-        //    Collider[] collidersInRange = Physics.OverlapSphere(transform.position, explosionRadius, targetLayers);
-        //    for(int i = 0; i < collidersInRange.Length; i++)
-        //    {
-        //        Health health = collidersInRange[i].GetComponent<Health>();
-        //        if(health)
-        //        {
-        //            health.TakeDamage(explosionDamage);
-        //        }
-        //    }
-        //}
-
+        bool shouldRelease = modifier == null || modifier.OnBulletHit(this, health);
+        if (shouldRelease)
+            pool.Release(gameObject);
     }
 }

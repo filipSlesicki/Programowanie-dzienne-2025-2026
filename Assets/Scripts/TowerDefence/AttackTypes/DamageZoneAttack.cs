@@ -2,26 +2,60 @@ using UnityEngine;
 
 namespace TowerDefence
 {
-    public class DamageZoneAttack : MonoBehaviour, IAttackModule
+    public class DamageZoneAttack : IAttackModule
     {
-        public float radius = 5;
-        public int damage = 1;
-        public LayerMask enemyLayer;
-        private Collider[] enemiesInRange = new Collider[32];
+        private readonly ZoneAttackData data;
+        private readonly Tower tower;
+        private static readonly Collider[] buffer = new Collider[32];
 
-        public void Attack()
+        private readonly GameObject vfxInstance;
+
+        public DamageZoneAttack(ZoneAttackData data, Tower tower)
         {
-            int enemyCount = Physics.OverlapSphereNonAlloc(transform.position, radius, enemiesInRange,enemyLayer);
-            for (int i = 0; i < enemyCount; i++)
+            this.data = data;
+            this.tower = tower;
+
+            if (data.AttackVfxPrefab != null)
             {
-                enemiesInRange[i].GetComponent<Health>().TakeDamage(damage);
+                vfxInstance = Object.Instantiate(
+                    data.AttackVfxPrefab,
+                    tower.transform.position,
+                    Quaternion.identity,
+                    tower.transform
+                );
+                vfxInstance.transform.localScale = Vector3.one * tower.TowerData.Range * 2f;
             }
         }
 
-        void OnDrawGizmosSelected()
+        public void Attack()
         {
+            int count = Physics.OverlapSphereNonAlloc(
+                tower.transform.position,
+                tower.TowerData.Range,
+                buffer,
+                data.EnemyLayer
+            );
+
+            for (int i = 0; i < count; i++)
+            {
+                Health health = buffer[i].GetComponent<Health>();
+                if (health == null)
+                    continue;
+
+                Vector3 hitPos = buffer[i].transform.position;
+                foreach (HitEffectData effect in tower.TowerData.HitEffects)
+                    effect.ApplyTo(health, hitPos);
+            }
+        }
+
+        public void Tick(float deltaTime) { }
+
+        public void DrawGizmos()
+        {
+            if (tower?.TowerData == null)
+                return;
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, radius);
+            Gizmos.DrawWireSphere(tower.transform.position, tower.TowerData.Range);
         }
     }
 }

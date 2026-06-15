@@ -11,19 +11,15 @@ namespace TowerDefence
         int nextPointIndex = 0;
         Health health;
         public int Reward = 1;
-        private List<EnemySpeedModifier> speedModifiers = new();
+        private List<StatusEffect> statusEffects = new();
 
-        public void AddSpeedModifier(EnemySpeedModifier speedModifier)
+        public void AddStatusEffect(StatusEffect effect)
         {
-            speedModifiers.Add(speedModifier);
-            currentSpeed *= speedModifier.modifier;
+            statusEffects.Add(effect);
+            effect.OnApply(this);
         }
 
-        public void RemoveSpeedModifier(EnemySpeedModifier speedModifier)
-        {
-            currentSpeed /= speedModifier.modifier;
-            speedModifiers.Remove(speedModifier);
-        }
+        public void MultiplySpeed(float multiplier) => currentSpeed *= multiplier;
 
         public Vector3 GetMoveDirection()
         {
@@ -35,10 +31,10 @@ namespace TowerDefence
             float distanceToNextPoint = Vector3.Distance(pathPoints[nextPointIndex].position, transform.position);
 
             if (nextPointIndex == 0)
-            {
                 return distanceToNextPoint;
-            }
-            float distanceBetweenPreviousAndNextPoint = Vector3.Distance(pathPoints[nextPointIndex - 1].position, pathPoints[nextPointIndex].position);
+
+            float distanceBetweenPreviousAndNextPoint = Vector3.Distance(
+                pathPoints[nextPointIndex - 1].position, pathPoints[nextPointIndex].position);
             return nextPointIndex + 1 - distanceToNextPoint / distanceBetweenPreviousAndNextPoint;
         }
 
@@ -52,32 +48,34 @@ namespace TowerDefence
 
         void Update()
         {
-            TickModifiers();
-            transform.position = Vector3.MoveTowards(transform.position, pathPoints[nextPointIndex].position, currentSpeed * Time.deltaTime);
+            TickStatusEffects();
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                pathPoints[nextPointIndex].position,
+                currentSpeed * Time.deltaTime);
+
             if (Vector3.Distance(transform.position, pathPoints[nextPointIndex].position) == 0)
             {
                 if (nextPointIndex == pathPoints.Length - 1)
                 {
-                    //Reached end
                     PlayerBase.Instance.Health.TakeDamage(1);
                     Destroy(gameObject);
                     return;
                 }
-
                 nextPointIndex++;
             }
         }
 
-        private void TickModifiers()
+        private void TickStatusEffects()
         {
-            float deltaTime = Time.deltaTime;
-      
-            foreach (var modifier in speedModifiers.ToArray())
+            float dt = Time.deltaTime;
+            for (int i = statusEffects.Count - 1; i >= 0; i--)
             {
-                modifier.Tick(deltaTime);
-                if (modifier.expired)
+                statusEffects[i].Tick(dt);
+                if (statusEffects[i].IsExpired)
                 {
-                    RemoveSpeedModifier(modifier);
+                    statusEffects[i].OnRemove(this);
+                    statusEffects.RemoveAt(i);
                 }
             }
         }

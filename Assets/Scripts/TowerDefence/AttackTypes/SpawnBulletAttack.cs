@@ -2,15 +2,25 @@ using UnityEngine;
 
 namespace TowerDefence
 {
-    public class SpawnBulletAttack : MonoBehaviour, IAttackModule
+    public class SpawnBulletAttack : IAttackModule
     {
-        public Bullet bulletPrefab;
-        public Transform shootPosition;
+        private readonly BulletAttackData data;
+        private readonly Tower tower;
+
+        public SpawnBulletAttack(BulletAttackData data, Tower tower)
+        {
+            this.data = data;
+            this.tower = tower;
+        }
 
         public void Attack()
         {
-            ObjectPoolingSystem.Instance.Get(bulletPrefab.gameObject, shootPosition.position, shootPosition.rotation);
+            Transform spawnPoint = tower.ShootPosition;
+            GameObject obj = ObjectPoolingSystem.Instance.Get(
+                data.BulletPrefab.gameObject, spawnPoint.position, spawnPoint.rotation);
 
+            if (obj.TryGetComponent(out Bullet bullet))
+                bullet.Configure(tower.TowerData.HitEffects, data.BulletModifier);
         }
     }
 }

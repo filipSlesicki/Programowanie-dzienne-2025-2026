@@ -262,10 +262,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  availableTowers:
-  - {fileID: 11400000, guid: eb4c6e9bb0a411146ae643bcbd5c4f7b, type: 2}
-  - {fileID: 11400000, guid: 6550cdfef014f574dab7b0208206f901, type: 2}
-  - {fileID: 11400000, guid: 4635417c15983e0429edf15594d8205a, type: 2}
   towerButtonParent: {fileID: 427737077}
   towerButtonPrefab: {fileID: 2925011004518664651, guid: 4849f04ded82c2b4bab3f49133777be4, type: 3}
 --- !u!4 &177791638

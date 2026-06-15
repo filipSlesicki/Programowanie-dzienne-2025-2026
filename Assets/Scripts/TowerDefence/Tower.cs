@@ -5,55 +5,62 @@ namespace TowerDefence
     public class Tower : MonoBehaviour
     {
         public EnemyDetection enemyDetection;
-        public float attackSpeed = 1;
-        public IAttackModule attackModule;
-        public int damage;
+        [SerializeField] private Transform shootPosition;
+
+        public Transform ShootPosition => shootPosition;
+        public TowerData TowerData { get; private set; }
+
+        private IAttackModule attackModule;
         private float cooldown;
-        public Bullet bulletPrefab;
-        public Transform shootPosition;
         private bool placed;
 
-        private void Awake()
-        {
-            attackModule = GetComponent<IAttackModule>();
-            Debug.Log("awake");
-        }
+        public void Place() => placed = true;
 
-        public void Place()
+        public void Setup(TowerData data)
         {
-            placed = true;
-        }
+            TowerData = data;
 
-        public void Setup(TowerData towerData)
-        {
-            Debug.Log("Setup");
+            SphereCollider detectionCollider = enemyDetection.GetComponent<SphereCollider>();
+            if (detectionCollider != null)
+                detectionCollider.radius = data.Range;
+
+            attackModule = data.AttackModule.CreateModule(this);
         }
 
         void Update()
         {
-            if (!placed)
-            {
+            if (!placed || attackModule == null)
                 return;
-            }
+
+            attackModule.Tick(Time.deltaTime);
+
             cooldown -= Time.deltaTime;
-            if (enemyDetection.target != null)
-            {
-                if(cooldown <= 0)
-                {
-                    Enemy enemy = enemyDetection.target;
-                    Vector3 enemyPosition = enemy.transform.position;
-                    float enemySpeed = enemy.moveSpeed;
-                    Vector3 enemyMoveDirection = enemy.GetMoveDirection();
-                    float distanceToEnemy = Vector3.Distance(transform.position, enemyPosition);
-                    float bulletTravelTime = distanceToEnemy / bulletPrefab.speed;
-                    Vector3 enemyPositionAfterTime = enemyPosition + enemyMoveDirection * enemy.moveSpeed * bulletTravelTime;
-                    enemyPositionAfterTime.y = transform.position.y;
-                    transform.LookAt(enemyPositionAfterTime);
-                    attackModule.Attack();
-                    
-                    cooldown = attackSpeed;
-                }
-            }
+
+            if (enemyDetection.target == null || cooldown > 0)
+                return;
+
+            Enemy enemy = enemyDetection.target;
+            transform.LookAt(PredictEnemyPosition(enemy));
+            attackModule.Attack();
+            cooldown = TowerData.AttackSpeed;
+        }
+
+        private void OnDrawGizmosSelected() => attackModule?.DrawGizmos();
+
+        private Vector3 PredictEnemyPosition(Enemy enemy)
+        {
+            float bulletSpeed = 0f;
+            if (TowerData.AttackModule is BulletAttackData bulletData)
+                bulletSpeed = bulletData.BulletSpeed;
+
+            if (bulletSpeed <= 0f)
+                return enemy.transform.position;
+
+            Vector3 enemyPos = enemy.transform.position;
+            float travelTime = Vector3.Distance(transform.position, enemyPos) / bulletSpeed;
+            Vector3 predicted = enemyPos + enemy.GetMoveDirection() * enemy.moveSpeed * travelTime;
+            predicted.y = transform.position.y;
+            return predicted;
         }
     }
 }

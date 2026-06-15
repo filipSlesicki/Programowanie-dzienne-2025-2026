@@ -201,9 +201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: TowerDefence::TowerDefence.Tower
   enemyDetection: {fileID: 0}
-  attackSpeed: 1
-  damage: 1
-  bulletPrefab: {fileID: -7073181287450447724, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
   shootPosition: {fileID: 0}
 --- !u!1 &6766798786990887484
 GameObject:
@@ -215,7 +212,6 @@ GameObject:
   m_Component:
   - component: {fileID: 99568620021752247}
   - component: {fileID: 257651951288561058}
-  - component: {fileID: 2837140625772833620}
   m_Layer: 9
   m_Name: Tower
   m_TagString: Untagged
@@ -254,21 +250,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: TowerDefence::TowerDefence.Tower
   enemyDetection: {fileID: 4877816336591462220}
-  attackSpeed: 1
-  damage: 1
-  bulletPrefab: {fileID: -7073181287450447724, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
-  shootPosition: {fileID: 4180606553247045085}
---- !u!114 &2837140625772833620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6766798786990887484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6961219a6ff65249bb0fe07b4c26008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: TowerDefence::TowerDefence.SpawnBullet
-  bulletPrefab: {fileID: -7073181287450447724, guid: 10e1e1686cde1474c9a87a3520915035, type: 3}
   shootPosition: {fileID: 4180606553247045085}

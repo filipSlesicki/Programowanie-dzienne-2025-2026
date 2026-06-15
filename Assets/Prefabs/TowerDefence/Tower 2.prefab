@@ -64,30 +64,5 @@ PrefabInstance:
     - {fileID: 2837140625772833620, guid: 8aa6388f2c5a8ca47bcdf2bc42217bc8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6766798786990887484, guid: 8aa6388f2c5a8ca47bcdf2bc42217bc8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8336217514726346813}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8aa6388f2c5a8ca47bcdf2bc42217bc8, type: 3}
---- !u!1 &949144924054951967 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6766798786990887484, guid: 8aa6388f2c5a8ca47bcdf2bc42217bc8, type: 3}
-  m_PrefabInstance: {fileID: 5819906234602211875}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8336217514726346813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949144924054951967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea4c0a44898639488b4e8dcd98bc3bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: TowerDefence::TowerDefence.DamageZone
-  radius: 5
-  damage: 2
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256

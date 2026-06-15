@@ -41,7 +41,7 @@ public class Gun : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab,
                 bulletSpawnPoint.position,
                 bulletSpawnPoint.rotation * Quaternion.Euler(0, spreadAngle, 0));
-            bullet.GetComponent<Bullet>().damage = damage;
+            //bullet.GetComponent<Bullet>().damage = damage;
         }
     }
 

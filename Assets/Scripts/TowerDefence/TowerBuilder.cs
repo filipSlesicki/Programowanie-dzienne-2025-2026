@@ -11,8 +11,6 @@ namespace TowerDefence
         [SerializeField]
         private LayerMask groundLayer;
         [SerializeField]
-        TowerData[] availableTowers;
-        [SerializeField]
         Transform towerButtonParent;
         [SerializeField]
         private TowerButton towerButtonPrefab;
@@ -28,7 +26,7 @@ namespace TowerDefence
             mousePositionInput.performed += OnMousePosition;
             mouseClickInput = inputActions.FindAction("MouseClick");
             mouseClickInput.performed += OnMouseClick;
-            foreach (TowerData towerData in availableTowers)
+            foreach (TowerData towerData in Resources.LoadAll<TowerData>("TowerData"))
             {
                 TowerButton towerButton = Instantiate(towerButtonPrefab, towerButtonParent);
                 towerButton.Setup(towerData, this);
